@@ -1,0 +1,93 @@
+{
+  "vconcat": [
+    {
+      "width": 800,
+      "height": 500,
+      "layer": [
+        {
+          "params": [
+            {
+              "name": "highlight",
+              "select": {"type": "point", "on": "mouseover"}
+            }
+          ],
+          "data": {
+            "url": "data/us-10m.json",
+            "format": {"type": "topojson", "feature": "states"}
+          },
+          "transform": [
+            {
+              "lookup": "id",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/dandex200/Information_Visualisation_Project/main/updated_id_us_avg_tuition.csv"
+                },
+                "key": "id",
+                "fields": ["State", "Average"]
+              }
+            }
+          ],
+          "mark": "geoshape",
+          "encoding": {
+            "color": {
+              "field": "Average",
+              "type": "quantitative",
+              "scale": {"scheme": "darkred"},
+              "condition": {
+                "param": "highlight",
+                "empty": false,
+                "value": "grey"
+              }
+            },
+            "tooltip": [
+              {"field": "State", "type": "nominal", "title": "State"},
+              {"field": "Average", "type": "nominal"}
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "data/us-10m.json",
+            "format": {"type": "topojson", "feature": "states"}
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": null,
+            "stroke": "lightgrey",
+            "strokeWidth": 0.2
+          }
+        }
+      ]
+    },
+    {"height": 5, "mark": "text"}
+  ],
+  "config": {
+    "padding": {"top": 20, "left": 20, "right": 20, "bottom": 20},
+    "background": "lightgrey",
+    "legend": {
+      "orient": "none",
+      "direction": "horizontal",
+      "legendX": 610,
+      "legendY": 570,
+      "gradientLength": 300,
+      "labelFont": "Segoe UI",
+      "labelFontSize": 10,
+      "labelColor": "black",
+      "titleFont": "Segoe UI",
+      "titleFontSize": 16,
+      "titleFontWeight": "lighter",
+      "titleColor": "black",
+      "titleLimit": 300
+    },
+    "projection": {"type": "albersUsa"},
+    "title": {
+      "anchor": "start",
+      "color": "black",
+      "subtitlePadding": 30,
+      "subtitleFont": "Calibri",
+      "subtitleFontSize": 15,
+      "subtitleFontWeight": "lighter",
+      "subtitleColor": "black"
+    }
+  }
+}
