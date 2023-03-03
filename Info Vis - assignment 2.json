@@ -62,9 +62,8 @@
   ],
   "config": {
     "padding": {"top": 20, "left": 20, "right": 20, "bottom": 20},
-    "background": "lightgrey",
     "legend": {
-      "orient": "none",
+      "orient": "bottom",
       "direction": "horizontal",
       "legendX": 610,
       "legendY": 570,
